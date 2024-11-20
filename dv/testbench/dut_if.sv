@@ -2,25 +2,24 @@
 `define _DUT_IF
 
 interface dut_if();
-  logic clk;		//chip clock
-  logic reset_n;	//chip reset
+  logic         clk;		  //chip clock
+  logic         reset_n;	//chip reset
   
-  //other signals?
-  
-  tri1 sclk;
-  tri1 sdata;   //be aware with inout signals. It is an opendrain that must be driven by someone continiuously
-  
-  //internal variables to manage inout signals
-  logic sda_drive;			//I2C interface. data
-  logic scl_drive;			//I2C interface. clock
-      
-  logic sda_val;
-  logic scl_val;
-  
-  //glue logic
-  assign sdata = sda_drive ? sda_val : 'z;
-  assign sclk = scl_drive ? scl_val : 'z;
+  //reg_block signals
+  logic                   req;
+  logic                   wr_en;
+  logic  [7:0]            addr;
+  logic  [7:0]            wr_data;
 
+  logic  [7:0]            rd_data;
+  
+  logic  signed [7:0]     I_adc_data;
+  reg    signed [7:0]     O_coef0;
+  reg    signed [7:0]     O_coef1;
+  reg    signed [7:0]     O_coef2;
+  reg    signed [7:0]     O_coef_div;
+  reg    [1:0]            O_decimation_ratio;
+  reg                     O_conv_en;
 endinterface
 
 `endif // _DUT_IF

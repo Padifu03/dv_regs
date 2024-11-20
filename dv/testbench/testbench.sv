@@ -8,7 +8,21 @@ import uvm_pkg::*;
 module top;
   dut_if dut_if();
   
-  //instantiate dut
+  reg_block reg_map(.clk(dut_if.clk), 
+                    .rst_n(dut_if.rst_n),
+                    .req(dut_if.req),
+                    .wr_en(dut_if.wr_en),
+                    .addr(dut_if.addr),
+                    .wr_data(dut-if.wr_data),
+                    .rd_data(dut_if.rd_data),
+                    .I_adc_data(dut_if.I_adc_data),
+                    .O_coef0(dut_if.O_coef0),
+                    .O_coef1(dut_if.O_coef1),
+                    .O_coef2(dut_if.O_coef2),
+                    .O_coef_div(dut_if.O_coef_div),
+                    .O_decimation_ratio(dut_if.O_decimation_ratio),
+                    .O_conv_en(dut_if.O_conv_en)
+                  );     
   
   initial begin
     $dumpfile("dump.vcd"); $dumpvars;
@@ -19,7 +33,7 @@ module top;
   
   initial begin
     //interface to database
-    run_test(); //+UVM_TESTNAME=test_i2c_write
+    run_test();
   end
     
 endmodule : top
