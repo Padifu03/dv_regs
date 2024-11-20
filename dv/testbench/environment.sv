@@ -1,9 +1,10 @@
-`include "agent_i2c.sv"
+//`include "agent_i2c.sv"
 
-class environment extends uvm_env;  
+class environment extends uvm_env;
   `uvm_component_utils(environment)
 
-  i2c_agent i2c_agt;
+  virtual dut_if my_dut_if;
+
   //instantiate agents, interface...
 
   function new(string name, uvm_component parent);
@@ -12,10 +13,11 @@ class environment extends uvm_env;
 
   function void build_phase(uvm_phase phase);
     //create agents
-    i2c_agt = i2c_agent::type_id::create("m_i2c_agt", this);
   endfunction
 
   function void connect_phase(uvm_phase phase);
-    //interface to database 
+    //interface to database
+    uvm_config_db #(virtual dut_if) :: get (this, "*", "dut_if", my_dut_if);
   endfunction
+
 endclass : environment
