@@ -12,7 +12,7 @@ class base_test extends uvm_test;
 
   //Build phase
   function void build_phase(uvm_phase phase);
-    super().build_phase(phase);
+    super.build_phase(phase);
 
     //create environment
     env = environment::type_id::create("top_env", this);
@@ -24,6 +24,7 @@ class base_test extends uvm_test;
   endfunction
 
   //Start phase
+  /* No sirve a priori. Si que podemos hacer un par de task para el reset y el clk
   function void start_of_simulation_phase (uvm_phase phase);
       super.start_of_simulation_phase (phase);
 
@@ -43,5 +44,5 @@ class base_test extends uvm_test;
     m_seq.start (m_env.seqr);
     phase.drop_objection (this);
   endtask
-
+  */
 endclass
