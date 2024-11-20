@@ -15,11 +15,11 @@ module top;
   always #5 clk = ~clk;
 
   //instantiate interface
-  dut_if my_dut_if(.clk(clk), .rst_n(reset_n));
+  dut_if my_dut_if();
 
   //instantiate dut
   reg_block reg_map(.clk(my_dut_if.clk), 
-                    .rst_n(my_dut_if.rst_n),
+                    .rst_n(my_dut_if.reset_n),
                     .req(my_dut_if.req),
                     .wr_en(my_dut_if.wr_en),
                     .addr(my_dut_if.addr),
@@ -46,8 +46,9 @@ module top;
   initial begin
     //interface to database
     uvm_config_db #(virtual dut_if)::set (null, "uvm_test_top", "dut_if", my_dut_if);
+
     //run tests
     run_test();
   end
-    
+
 endmodule : top
