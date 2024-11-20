@@ -6,33 +6,47 @@ import uvm_pkg::*;
 `include "adc_dms_model.sv"
 
 module top;
-  dut_if dut_if();
-  
-  reg_block reg_map(.clk(dut_if.clk), 
-                    .rst_n(dut_if.rst_n),
-                    .req(dut_if.req),
-                    .wr_en(dut_if.wr_en),
-                    .addr(dut_if.addr),
-                    .wr_data(dut-if.wr_data),
-                    .rd_data(dut_if.rd_data),
-                    .I_adc_data(dut_if.I_adc_data),
-                    .O_coef0(dut_if.O_coef0),
-                    .O_coef1(dut_if.O_coef1),
-                    .O_coef2(dut_if.O_coef2),
-                    .O_coef_div(dut_if.O_coef_div),
-                    .O_decimation_ratio(dut_if.O_decimation_ratio),
-                    .O_conv_en(dut_if.O_conv_en)
-                  );     
-  
+
+  //clock and reset signal declaration
+  bit clk;
+  bit reset_n;
+
+  //clock generation
+  always #5 clk = ~clk;
+
+  //instantiate interface
+  dut_if my_dut_if(.clk(clk), .rst_n(reset_n));
+
+  //instantiate dut
+  reg_block reg_map(.clk(my_dut_if.clk), 
+                    .rst_n(my_dut_if.rst_n),
+                    .req(my_dut_if.req),
+                    .wr_en(my_dut_if.wr_en),
+                    .addr(my_dut_if.addr),
+                    .wr_data(my_dut_if.wr_data),
+                    .rd_data(my_dut_if.rd_data),
+                    .I_adc_data(my_dut_if.I_adc_data),
+                    .O_coef0(my_dut_if.O_coef0),
+                    .O_coef1(my_dut_if.O_coef1),
+                    .O_coef2(my_dut_if.O_coef2),
+                    .O_coef_div(my_dut_if.O_coef_div),
+                    .O_decimation_ratio(my_dut_if.O_decimation_ratio),
+                    .O_conv_en(my_dut_if.O_conv_en)
+                  );
+
   initial begin
     $dumpfile("dump.vcd"); $dumpvars;
     $shm_open("waves.shm");
     $shm_probe("ASM");
-	//reset?
+    //reset
+    reset_n = 0;
+   #5 reset_n = 1;
   end
-  
+
   initial begin
     //interface to database
+    uvm_config_db #(virtual dut_if)::set (null, "uvm_test_top", "dut_if", my_dut_if);
+    //run tests
     run_test();
   end
     
