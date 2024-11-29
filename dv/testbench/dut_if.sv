@@ -4,7 +4,7 @@
 interface dut_if();
   logic         clk;		  //chip clock
   logic         reset_n;	//chip reset
-  
+
   //reg_block signals
   logic                   req;
   logic                   wr_en;
@@ -12,7 +12,7 @@ interface dut_if();
   logic  [7:0]            wr_data;
 
   logic  [7:0]            rd_data;
-  
+
   logic  signed [7:0]     I_adc_data;
   reg    signed [7:0]     O_coef0;
   reg    signed [7:0]     O_coef1;
