@@ -1,8 +1,8 @@
 `ifndef _CLK_SEQUENCER
 `define _CLK_SEQUENCER
 
-class sequencer_clk extends uvm_sequencer#(clk_basic_tr);
-    `uvm_component_utils(sequencer_clk)
+class clk_sequencer extends uvm_sequencer#(clk_basic_tr);
+    `uvm_component_utils(clk_sequencer)
 
     // Constructor
     function new(string name, uvm_component parent);
