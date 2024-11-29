@@ -1,19 +1,19 @@
 `ifndef _CLK_AGT
 `define _CLK_AGT
 
-`include "transaction_clk.sv"
-`include "sequencer_clk.sv"
-`include "seq_clk.sv"
-`include "monitor_clk.sv"
-`include "driver_clk.sv"
+`include "agents/clk_agent/transaction_clk.sv"
+`include "agents/clk_agent/sequencer_clk.sv"
+`include "agents/clk_agent/seq_clk.sv"
+`include "agents/clk_agent/monitor_clk.sv"
+`include "agents/clk_agent/driver_clk.sv"
 
-class clk_rst_agent extends uvm_agent;
+class clk_agent extends uvm_agent;
     // Component instances
     clk_driver      driver;
     clk_sequencer   sequencer;
     clk_monitor     monitor;
 
-    `uvm_component_utils(clk_agent)
+    `uvm_component_utils(clk_agent);
 
     // Constructor
     function new(string name, uvm_component parent);
@@ -38,6 +38,6 @@ class clk_rst_agent extends uvm_agent;
     task run_phase(uvm_phase phase);
     endtask : run_phase
 
-endclass : clk_rst_agent
+endclass : clk_agent
 
 `endif //_CLK_AGT
