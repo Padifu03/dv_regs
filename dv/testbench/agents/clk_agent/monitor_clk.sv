@@ -1,7 +1,7 @@
 `ifndef _CLK_MON
 `define _CLK_MON
 
-class clk_rst_monitor extends uvm_monitor;
+class clk_monitor extends uvm_monitor;
     `uvm_component_utils(clk_monitor)
 
     uvm_analysis_port #(clk_basic_tr) port;
@@ -23,21 +23,14 @@ class clk_rst_monitor extends uvm_monitor;
     task run_phase(uvm_phase phase);
         tr = new();
 
-        fork //new thread to avoid blocks
-            forever begin //infinite loop
-            //wait for events, send through the port
-                @(i_dut_vif.clk);
-                tr.clk = i_dut_vif.clk;
-                tr.m_tr_type = CLK;
-                port.write(tr);
-            end
-
-    forever begin //rst infinite loop
-       @(i_dut_vif.rst_n);
-
-    end
-    join_none;
+        forever begin //infinite loop
+        //wait for events, send through the port
+            @(i_dut_vif.clk);
+            tr.clk = i_dut_vif.clk;
+            port.write(tr);
+        end
     endtask : run_phase
+
 endclass : clk_rst_monitor
 
 `endif //_CLK_MON
