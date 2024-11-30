@@ -40,7 +40,7 @@ class clk_driver extends uvm_driver #(clk_basic_tr);
 
     // Drive clk
     task drive();
-        
+
         fork
             forever begin
                 if(req_backup.en_clk) begin
@@ -50,6 +50,7 @@ class clk_driver extends uvm_driver #(clk_basic_tr);
                     #(req_backup.period_ns*1ns/2);
                 end else begin
                     dut_vif.clk = 0;
+                   @(req_backup.en_clk);
                 end
             end
         join_none
