@@ -3,7 +3,7 @@
 
 //`include "transaction_clk.sv"
 
-class clk_rst_basic_seq extends uvm_sequence#(clk_basic_tr);
+class clk_basic_seq extends uvm_sequence#(clk_basic_tr);
     bit en_clk;
     int period_ns;
 
@@ -19,6 +19,6 @@ class clk_rst_basic_seq extends uvm_sequence#(clk_basic_tr);
                            req.period_ns == period_ns;    });
     endtask : body
 
-endclass : clk_rst_basic_seq 
+endclass : clk_basic_seq 
 
 `endif // _CLK_SEQ
