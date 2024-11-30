@@ -3,7 +3,7 @@
 
 class clk_monitor extends uvm_monitor;
     `uvm_component_utils(clk_monitor)
-
+    clk_basic_tr tr;
     uvm_analysis_port #(clk_basic_tr) port;
     virtual dut_if i_dut_vif;
 
@@ -31,6 +31,6 @@ class clk_monitor extends uvm_monitor;
         end
     endtask : run_phase
 
-endclass : clk_rst_monitor
+endclass : clk_monitor
 
 `endif //_CLK_MON

@@ -1,7 +1,7 @@
 `ifndef _CLK_SEQ
 `define _CLK_SEQ
 
-`include "transaction_clk.sv"
+//`include "transaction_clk.sv"
 
 class clk_rst_basic_seq extends uvm_sequence#(clk_basic_tr);
     bit en_clk;

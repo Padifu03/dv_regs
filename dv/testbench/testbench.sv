@@ -6,14 +6,6 @@ import uvm_pkg::*;
 `include "adc_dms_model.sv"
 
 module top;
-
-  //clock and reset signal declaration
-  bit clk;
-  bit reset_n;
-
-  //clock generation
-  always #5 clk = ~clk;
-
   //instantiate interface
   dut_if my_dut_if();
 
@@ -39,13 +31,13 @@ module top;
     $shm_open("waves.shm");
     $shm_probe("ASM");
     //reset
-    reset_n = 0;
-   #5 reset_n = 1;
+    my_dut_if.reset_n = 0;
+   #5 my_dut_if.reset_n = 1;
   end
 
   initial begin
     //interface to database
-    uvm_config_db #(virtual dut_if)::set (null, "uvm_test_top", "dut_if", my_dut_if);
+    uvm_config_db #(virtual dut_if)::set (null, "*", "dut_if", my_dut_if);
 
     //run tests
     run_test();

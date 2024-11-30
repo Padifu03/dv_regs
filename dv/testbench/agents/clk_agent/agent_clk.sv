@@ -1,11 +1,11 @@
 `ifndef _CLK_AGT
 `define _CLK_AGT
 
-`include "agents/clk_agent/transaction_clk.sv"
-`include "agents/clk_agent/sequencer_clk.sv"
-`include "agents/clk_agent/seq_clk.sv"
-`include "agents/clk_agent/monitor_clk.sv"
-`include "agents/clk_agent/driver_clk.sv"
+`include "transaction_clk.sv"
+`include "sequencer_clk.sv"
+`include "seq_clk.sv"
+`include "monitor_clk.sv"
+`include "driver_clk.sv"
 
 class clk_agent extends uvm_agent;
     // Component instances
@@ -24,7 +24,7 @@ class clk_agent extends uvm_agent;
     function void build_phase(uvm_phase phase);
         driver = clk_driver::type_id::create("clk_drv", this);
         monitor = clk_monitor::type_id::create("clk_mon", this);
-        m_sequencer = clk_sequencer::type_id::create("clk_sequencer", this);
+        sequencer = clk_sequencer::type_id::create("clk_sequencer", this);
     endfunction : build_phase
 
     // Connect phase

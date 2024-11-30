@@ -2,9 +2,9 @@
 `define _CLK_TR
 
 class clk_basic_tr extends uvm_sequence_item;
-    rand bit en_clk;
-    rand int period_ns = 1000;
-    bit clk;
+    rand bit en_clk = 0;
+    rand int period_ns = 0;
+    bit clk = 0;
 
     // Utility and field macros
     `uvm_object_utils_begin(clk_basic_tr)  

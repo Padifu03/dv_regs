@@ -15,16 +15,20 @@ class clk_driver extends uvm_driver #(clk_basic_tr);
 
     // Build phase
     function void build_phase(uvm_phase phase);
+
     endfunction : build_phase
 
     // Connect phase
     function void connect_phase(uvm_phase phase);
         if(!uvm_config_db#(virtual dut_if)::get(this, "", "dut_if", dut_vif))
-            `uvm_fatal("NO_VIF",{"virtual interface must be set for:", get_full_name().".vif"} );
+            `uvm_fatal("NO_VIF",{"virtual interface must be set for:", get_full_name(),".vif"} );
     endfunction : connect_phase
 
     // Run phase
     task run_phase(uvm_phase phase);
+        req = new();
+        req_backup = new();
+
         drive();
         forever begin
             seq_item_port.get_next_item(req);
@@ -36,8 +40,7 @@ class clk_driver extends uvm_driver #(clk_basic_tr);
 
     // Drive clk
     task drive();
-        dut_vif.clk = 0;
-
+        
         fork
             forever begin
                 if(req_backup.en_clk) begin
