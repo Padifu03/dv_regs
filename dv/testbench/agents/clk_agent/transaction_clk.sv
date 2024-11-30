@@ -6,6 +6,8 @@ class clk_basic_tr extends uvm_sequence_item;
     rand int period_ns = 0;
     bit clk = 0;
 
+    constraint en_clk_limit{en_clk <= 1;} 
+
     // Utility and field macros
     `uvm_object_utils_begin(clk_basic_tr)  
         `uvm_field_int(en_clk, UVM_ALL_ON)
