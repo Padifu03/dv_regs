@@ -1,5 +1,5 @@
 //`include "agent_i2c.sv"
-`include "agents/clk_agent/agent_clk.sv"
+`include "agent_clk.sv"
 
 class environment extends uvm_env;
   //instantiate if
