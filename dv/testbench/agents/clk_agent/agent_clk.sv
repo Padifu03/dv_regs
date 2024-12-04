@@ -13,7 +13,7 @@ class clk_agent extends uvm_agent;
     clk_sequencer   sequencer;
     clk_monitor     monitor;
 
-    `uvm_component_utils(clk_agent);
+    `uvm_component_utils(clk_agent)
 
     // Constructor
     function new(string name, uvm_component parent);

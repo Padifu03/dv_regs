@@ -32,6 +32,7 @@ class clk_driver extends uvm_driver #(clk_basic_tr);
         drive();
         forever begin
             seq_item_port.get_next_item(req);
+            $display("Valor de llegada del port: EN: %0d, PERIOD: %0d", req.en_clk, req.period_ns);
             req_backup = req;
             `uvm_info("CLK", $sformatf("Drv writes %p", req), UVM_LOW);
             seq_item_port.item_done();
@@ -49,8 +50,8 @@ class clk_driver extends uvm_driver #(clk_basic_tr);
                     dut_vif.clk = 1;
                     #(req_backup.period_ns*1ns/2);
                 end else begin
-                    dut_vif.clk = 0;
-                   @(req_backup.en_clk);
+                    dut_vif.clk = 0; 
+                    @(req_backup.en_clk);
                 end
             end
         join_none

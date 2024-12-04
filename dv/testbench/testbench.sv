@@ -33,6 +33,8 @@ module top;
     //reset
     my_dut_if.reset_n = 0;
    #5 my_dut_if.reset_n = 1;
+   //set up adc data to 0. It is needed because in dut the reg has no default value, it takes it from ADC block and it is expected to be 0 after reset.
+   my_dut_if.I_adc_data = 0;
   end
 
   initial begin
