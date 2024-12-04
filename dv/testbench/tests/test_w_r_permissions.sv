@@ -1,5 +1,5 @@
-class test_dummy extends base_test;
-  `uvm_component_utils(test_dummy)
+class test_w_r_permission extends base_test;
+  `uvm_component_utils(test_w_r_permission)
   
   function new(string name, uvm_component parent);
     super.new(name,parent);
@@ -13,4 +13,4 @@ class test_dummy extends base_test;
     
  	phase.drop_objection(this);
   endtask
-endclass : test_dummy
+endclass : test_w_r_permission
