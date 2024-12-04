@@ -4,6 +4,8 @@ class base_test extends uvm_test;
 
   environment env;
   virtual dut_if dut_vif;
+  clk_basic_seq seq;
+
   `uvm_component_utils(base_test)
 
   function new(string name, uvm_component parent);
@@ -26,4 +28,47 @@ class base_test extends uvm_test;
   virtual function void end_of_elaboration_phase (uvm_phase phase);
     uvm_top.print_topology ();
   endfunction
+
+  // Task para escribir en un registro
+  task write_register(input [7:0] addr, input [7:0] data);
+    begin
+      // Asignación de valores para escritura
+      dut_vif.addr = addr;
+      dut_vif.wr_data = data;
+      dut_vif.req = 1;
+      dut_vif.wr_en = 1;
+      #10; // Tiempo de espera para simular ciclos de reloj
+      dut_vif.req = 0;
+      dut_vif.wr_en = 0;
+      #10; // Tiempo de espera para simular ciclos de reloj
+    end
+  endtask
+  
+  // Task para leer un registro
+  task read_register(input [7:0] addr, output [7:0] data);
+    begin
+      // Asignación de valores para lectura
+      dut_vif.addr = addr;
+      dut_vif.req = 1;
+      dut_vif.wr_en = 0; // Operación de lectura
+      #10;  // Espera de 10 ciclos de reloj
+      data = dut_vif.rd_data; // Obtener datos leídos
+      dut_vif.req = 0;
+      #10;  // Espera de 10 ciclos de reloj
+    end
+  endtask
+
+  // Task para verificar el valor leído de un registro
+  task check_register(input [7:0] addr, input [7:0] expected_value);
+    reg [7:0] data;
+    begin
+      read_register(addr, data);
+      if (data !== expected_value) begin
+        `uvm_error("REGISTER_CHECK", $sformatf("Expected 0x%0h, but got 0x%0h for register 0x%0h", expected_value, data, addr));
+      end else begin
+        `uvm_info("REGISTER_CHECK", $sformatf("Correct value 0x%0h for register 0x%0h", data, addr), UVM_LOW);
+      end
+    end
+  endtask
+
 endclass
