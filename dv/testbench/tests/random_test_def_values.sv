@@ -29,10 +29,10 @@ class random_test_def_values extends base_test;
         `uvm_info(get_name(), "\n  ** RANDOM TEST DEFAULT VALUES **", UVM_LOW)
 
         for (int i = 0; i < 10; i++) begin
-            this.randomize();
+            randomize();
             get_random_addr_def_value(random_addr, def_val);
             
-            if(def_val !== `ERROR_DEF) begin
+            if(def_val != `ERROR_DEF) begin
                 check_register(random_addr, def_val);
             end else begin
                 `uvm_error(get_name(), "REGISTER_ADDR OUT OF RANGE");
@@ -57,7 +57,8 @@ class random_test_def_values extends base_test;
         phase.drop_objection(this);
     endtask : run_phase
 
-    task get_random_addr_def_value(input bit[7:0] addr, output bit[7:0] default_value)
+    task get_random_addr_def_value(input bit[7:0] addr, output bit[7:0] default_value);
+        default_value = `ERROR_DEF;
 
         case (addr)
             `FIR_COEF_0_ADDR:
@@ -85,7 +86,7 @@ class random_test_def_values extends base_test;
                 default_value = `ERROR_DEF; 
         endcase
 
-        `uvm_info("RANDOMIZE DATA:", $sformatf("ADDR: 0x%0h, DEF_VALUE: 0x%0h", addr, default_value), UVM_LOW);
+        `uvm_info("RANDOMIZED DATA:", $sformatf("ADDR: 0x%0h, DEF_VALUE: 0x%0h", addr, default_value), UVM_LOW);
     endtask : get_random_addr_def_value
 
 endclass : random_test_def_values
