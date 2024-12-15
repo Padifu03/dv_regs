@@ -8,7 +8,7 @@ class random_test_def_values extends base_test;
 
     //constraints
     constraint random_addr_c{
-        random_addr in {8'h00, 8'h01, 8'h02, 8'h03, 8'h04, 8'h05, 8'h07};
+        random_addr inside {8'h00, 8'h01, 8'h02, 8'h03, 8'h04, 8'h05, 8'h07};
     }
 
     function new(string name, uvm_component parent);
@@ -35,7 +35,7 @@ class random_test_def_values extends base_test;
             if(def_val !== `ERROR_DEF) begin
                 check_register(random_addr, def_val);
             end else begin
-                `uvm_error("REGISTER_ADDR OUT OF RANGE");
+                `uvm_error(get_name(), "REGISTER_ADDR OUT OF RANGE");
             end
         end
         
@@ -50,7 +50,7 @@ class random_test_def_values extends base_test;
             if(def_val != `ERROR_DEF) begin
                 check_register(random_addr, def_val);
             end else begin
-                `uvm_error("REGISTER_ADDR OUT OF RANGE");
+                `uvm_error(get_name(), "REGISTER_ADDR OUT OF RANGE");
             end
         end
 
