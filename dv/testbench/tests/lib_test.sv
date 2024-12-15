@@ -8,6 +8,6 @@
 
 `include "test_def_values.sv"
 
-//`include "random_test_def_values.sv"
+`include "random_test_def_values.sv"
 
 `include "test_w_r_permissions.sv"
