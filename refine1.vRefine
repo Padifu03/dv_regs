@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<refinement-file-root>
+  <information comment-version="2" creation-time="Sun 15 Dec 2024 12:21:36 CET" creator="est08" csCheck="false" save-ref-method="seq" tool-version="Cadence Verisium Manager23.03" rules-signature-c="15de24c8f2514f61bdb6fa697af789">
+    <ucm-files>
+      <ucm-file domain="icc" modelCheckSum="884853201" path="icc_34bdc9d1_00000000.ucm(merged)"></ucm-file>
+    </ucm-files>
+    <ccf-files></ccf-files>
+  </information>
+  <rules>
+    <rule ccType="inst" comment="0" domain="icc" entityName="adc_dms_model" entityType="inst" excTime="1734261674" name="exclude" recursiveMetrics="overall" reviewer="2" user="1" vscope="default"></rule>
+  </rules>
+  <cache-map>
+    <cache-entry key="0" value="Excluded ADC  model, not useful for RegMap coverage."></cache-entry>
+    <cache-entry key="1" value="est08"></cache-entry>
+    <cache-entry key="2" value="Enrique y Juanfran"></cache-entry>
+  </cache-map>
+</refinement-file-root>
