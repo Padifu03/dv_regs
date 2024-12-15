@@ -63,9 +63,11 @@ class base_test extends uvm_test;
     reg [7:0] data;
     begin
       read_register(addr, data);
-      if (data !== expected_value) begin
-        `uvm_error("REGISTER_CHECK", $sformatf("Expected 0x%0h, but got 0x%0h for register 0x%0h", expected_value, data, addr));
-      end else begin
+      assert (data == expected_value) else begin
+          // Reportar un error si los valores no coinciden
+          `uvm_error("REGISTER_CHECK", $sformatf("Expected 0x%0h, but got 0x%0h for register 0x%0h", expected_value, data, addr));
+      end
+      if (data == expected_value) begin
         `uvm_info("REGISTER_CHECK", $sformatf("Correct value 0x%0h for register 0x%0h", data, addr), UVM_LOW);
       end
     end
